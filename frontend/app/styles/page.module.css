@@ -1,0 +1,69 @@
+:root {
+  --font-family: "Poligon Light", "Poligon Light Placeholder", sans-serif;
+  --letter-spacing: -0.02em;
+  --lt-gray-100: #f8f9fc;
+  --lt-gray-200: #f1f3f9;
+  --lt-gray-300: #dee3ed;
+  --lt-gray-500: #8f96a3;
+  --lt-gray-600: #5e636e;
+  --lt-orange: #B8603B;
+}
+
+.bgwite {
+  font-family: var(--font-family);
+  color: var(--lt-gray-600);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  height: bold;
+}
+
+.text2xl{
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #f3f4f1;
+  text-align: center; 
+}
+
+.title {
+  font-family: var(--font-family);
+  letter-spacing: var(--letter-spacing);
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--lt-gray-600);
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-family: var(--font-family);
+  letter-spacing: var(--letter-spacing);
+  font-size: 18px;
+  padding: 10px;
+  color: var(--lt-gray-500);
+}
+
+.button {
+  width: 10%;
+  padding: 5px;
+  border-radius: 12px;
+  background-color: var(--lt-orange);
+  color: var(--lt-gray-100);
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #9c4d28; 
+}
