@@ -1,0 +1,52 @@
+:root {
+  --font-family: "Poligon Light", "Poligon Light Placeholder", sans-serif;
+  --letter-spacing: -0.02em;
+  --lt-gray-100: #f8f9fc;
+  --lt-gray-200: #f1f3f9;
+  --lt-gray-300: #dee3ed;
+  --lt-gray-500: #8f96a3;
+  --lt-gray-600: #5e636e;
+  --lt-orange: #B8603B;
+}
+.dashboard {
+  display: flex;
+}
+
+.sidebar {
+  width: 240px;
+  height: 100vh;
+  background-color: #f3f4f1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sidebar .logo {
+  margin-bottom: 30px;
+}
+
+.sidebar img {
+  width: 40px;
+  height: 40px;
+}
+
+.sidebar .button {
+  background-color: #B8603B;
+  color: white;
+  border: none;
+  padding: 12px;
+  margin: 10px 0;
+  width: 100%;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.sidebar .button:hover {
+  background-color: #9c4d28;
+}
+
+.mainContent {
+  flex-grow: 1;
+  padding: 20px;
+}

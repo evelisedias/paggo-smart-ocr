@@ -25,9 +25,9 @@ export default function Login() {
 
   return (
     <div className={styles.container}>
-      <button onClick={handleGoBack} className={styles.backButton}>
-        <FaArrowLeft/>
-      </button> 
+    <button onClick={handleGoBack} className={styles.backButton}>
+      <FaArrowLeft/>
+     </button> 
       <h1 className={styles.title}>Faça Login</h1>
       <form onSubmit={handleLogin} className={styles.form}>
         <input

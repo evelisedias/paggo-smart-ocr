@@ -1,3 +1,14 @@
+:root {
+  --font-family: "Poligon Light", "Poligon Light Placeholder", sans-serif;
+  --letter-spacing: -0.02em;
+  --lt-gray-100: #f8f9fc;
+  --lt-gray-200: #f1f3f9;
+  --lt-gray-300: #dee3ed;
+  --lt-gray-500: #8f96a3;
+  --lt-gray-600: #5e636e;
+  --lt-orange: #B8603B;
+}
+
 body {
   background-color: #f3f4f1;
   display: flex;
@@ -73,7 +84,7 @@ body {
 .backButton {
   position: fixed;
   left: 20px;
-  bottom: 20px;
+  bottom: 40px;
   background: none;
   border: none;
   color: #0070f3;

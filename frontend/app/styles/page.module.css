@@ -67,3 +67,12 @@
 .button:hover {
   background-color: #9c4d28; 
 }
+
+
+.valid {
+  color: green;
+}
+
+.invalid {
+  color: red;
+}
