@@ -120,7 +120,6 @@ export default function Register() {
         {error && <p className={styles.error}>{error}</p>}
         
         {}
-        {successMessage && <p className={styles.success}>{successMessage}</p>}
         <button type="submit" className={styles.button}>Cadastrar</button>
       </form>
 

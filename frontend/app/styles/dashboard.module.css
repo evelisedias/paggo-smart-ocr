@@ -7,6 +7,7 @@
   --lt-gray-500: #8f96a3;
   --lt-gray-600: #5e636e;
   --lt-orange: #B8603B;
+  --lt-green: #47b2b2;
 }
 .dashboard {
   display: flex;
@@ -46,6 +47,11 @@
   background-color: #9c4d28;
 }
 
+.success{
+  color: red;
+  font-size: 14px;
+}
+
 .mainContent {
   flex-grow: 1;
   padding: 20px;
@@ -53,4 +59,58 @@
 
 .fileInput {
   display: none;
+}
+
+.imageContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  cursor: pointer; 
+  padding: 5px;
+  border-radius: 5px;
+  
+}
+
+.imgRecibo {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+
+.imageName {
+  font-size: 16px;
+  margin: 0;
+  margin-left: 10px;
+}
+
+
+.radioSelected {
+  appearance: none;
+  width: 20px; 
+  height: 20px; 
+  border: 2px solid #ccc;
+  border-radius: 50%; 
+  position: relative; 
+  cursor: pointer;
+  background-color: transparent;
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+}
+
+.radioSelected:checked {
+  border-color: var(--lt-green)
+}
+
+.radioSelected:checked::after {
+  content: '';
+  width: 10px; 
+  height: 10px; 
+  background-color: var(--lt-green); 
+  border-radius: 50%; 
+  position: absolute;
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
 }
