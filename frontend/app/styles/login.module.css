@@ -92,3 +92,7 @@ body {
   font-size: 24px;
   z-index: 10;
 }
+
+.success {
+  color: #47b2b2;
+ }

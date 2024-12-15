@@ -31,7 +31,7 @@
   height: 40px;
 }
 
-.sidebar .button {
+.sidebar .button{
   background-color: #B8603B;
   color: white;
   border: none;
@@ -49,4 +49,8 @@
 .mainContent {
   flex-grow: 1;
   padding: 20px;
+}
+
+.fileInput {
+  display: none;
 }
