@@ -36,7 +36,7 @@ export default function Dashboard() {
     const formData = new FormData();
     formData.append('file', selectedFile);
     try {
-      const response = await api.post('/img', formData, {
+      const response = await api.post('/user/img', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

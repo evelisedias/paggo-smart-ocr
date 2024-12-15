@@ -1,6 +1,8 @@
 import { Controller, Post, Param } from '@nestjs/common';
 import { OcrService } from './ocr.service';
 import { ImgService } from '../img/img.service';
+import * as fs from 'fs';
+import * as path from 'path';
 
 @Controller('ocr')
 export class OcrController {
@@ -19,7 +21,9 @@ export class OcrController {
         throw new Error ('Imagem não encontrada.');
       }
 
-      const imageBuffer = Buffer.from(image.file, 'base64');
+      const imagePath = path.join(__dirname, '..', '..', 'upload', image.title);
+
+      const imageBuffer = fs.readFileSync(imagePath);
 
       const text = await this.ocrService.extractTextFromImage(imageBuffer)
 

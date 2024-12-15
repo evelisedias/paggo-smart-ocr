@@ -16,9 +16,10 @@ model User {
   password    String
   createdAt   DateTime        @default(now())
   documents   Document[]
-  image       Img[]
+  images      Img[]
   @@map("Users")
 }
+
 
 
 model Document {
@@ -33,10 +34,13 @@ model Document {
 }
 
 model Img {
-  id          Int           @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
   title       String
-  uploadedAt  DateTime      @default(now())
+  uploadedAt  DateTime @default(now())
   userId      Int
-  user        User          @relation(fields: [userId], references: [id])
-  @@map("Images")
+  imagePath  String
+  user        User     @relation(fields: [userId], references: [id])
+  @@map("images")
 }
+
+

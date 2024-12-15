@@ -21,13 +21,15 @@ CREATE TABLE "Documents" (
 );
 
 -- CreateTable
-CREATE TABLE "Images" (
+CREATE TABLE "Img" (
     "id" SERIAL NOT NULL,
     "title" TEXT NOT NULL,
+    "file" BYTEA NOT NULL,
     "uploadedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "userId" INTEGER NOT NULL,
+    "imagePath" TEXT NOT NULL,
 
-    CONSTRAINT "Images_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "Img_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
@@ -37,4 +39,4 @@ CREATE UNIQUE INDEX "Users_email_key" ON "Users"("email");
 ALTER TABLE "Documents" ADD CONSTRAINT "Documents_userId_fkey" FOREIGN KEY ("userId") REFERENCES "Users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Images" ADD CONSTRAINT "Images_userId_fkey" FOREIGN KEY ("userId") REFERENCES "Users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Img" ADD CONSTRAINT "Img_userId_fkey" FOREIGN KEY ("userId") REFERENCES "Users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

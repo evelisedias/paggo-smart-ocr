@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { ImgModule } from './modules/img/img.module';  
-
+import { UserModule } from './modules/user/user.module';  
 @Module({
   imports: [
     ServeStaticModule.forRoot({
@@ -10,6 +10,9 @@ import { ImgModule } from './modules/img/img.module';
       serveRoot: '/uploads',  
     }),
     ImgModule,  
+    UserModule,  
   ],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}

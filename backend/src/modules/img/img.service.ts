@@ -2,6 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { ImgDTO } from './img.dto';
 import { PrismaService } from '../../database/PrismaService';
 import { Multer } from 'multer';
+import { connect } from 'http2';
+
 
 @Injectable()
 export class ImgService {
@@ -9,18 +11,29 @@ export class ImgService {
   constructor(private prisma: PrismaService) {}
 
   async create(file: Multer.File) {
-    const imagePath = `/uploads/${file.filename}`;
+    try {
+      const imagePath = `/uploads/${file.filename}`;
   
-    const image = await this.prisma.img.create({
-      data: {
-        title: file.originalname,
-        uploadedAt: new Date(),
-        userId: 11, 
-      },
-    });
+      const image = await this.prisma.img.create({
+        data: {
+            title: file.originalname,
+            uploadedAt: new Date(),
+            imagePath,
+            user: {
+              connect: { id: 11}
+            },
+            
+        },
+      });
   
-    return image;
+      return image;
+   
+    } catch (error) {
+      console.error('Erro ao criar a imagem:', error);
+      throw new Error('Erro ao salvar a imagem.');
+    }
   }
+  
 
   async findAll() {
     return this.prisma.img.findMany();
@@ -44,7 +57,7 @@ export class ImgService {
         throw new Error('Imagem não encontrada');
       }
 
-      return image; // Retorna a imagem completa
+      return image;
     } catch (error) {
       console.error('Erro ao buscar imagem:', error);
       throw new Error('Erro ao buscar a imagem.');
