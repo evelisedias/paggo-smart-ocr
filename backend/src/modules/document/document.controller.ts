@@ -11,10 +11,12 @@ export class DocumentController {
     return this.documentService.create(data)
     }
   
-  @Get()
+  @Get('')
   async findAll() {
     return this.documentService.findAll();
   }
+
+
 
   @Put(':id')
   async update(@Param('id') id: number, @Body() data: DocumentDTO){

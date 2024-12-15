@@ -1,12 +1,15 @@
 import { Module } from '@nestjs/common';
-import { UserModule } from './modules/user/user.module';
-import { DocumentModule } from './modules/document/document.module';
-import { ImgModule } from './modules/img/img.module';
-
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
+import { ImgModule } from './modules/img/img.module';  
 
 @Module({
-  imports: [UserModule, DocumentModule, ImgModule],
-  controllers: [],
-  providers: [],
+  imports: [
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'uploads'),  
+      serveRoot: '/uploads',  
+    }),
+    ImgModule,  
+  ],
 })
 export class AppModule {}
