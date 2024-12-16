@@ -36,7 +36,7 @@ export default function Dashboard() {
     const formData = new FormData();
     formData.append('file', selectedFile);
     try {
-      const response = await api.post('/user/img', formData, {
+      const response = await api.post('/img', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -44,6 +44,9 @@ export default function Dashboard() {
 
       alert('Upload realizado com sucesso!');
       console.log('Resposta do servidor: ', response.data);
+      setImages(prevImages => [...prevImages, response.data]);
+
+
     } catch (error) {
       console.log('Erro ao enviar arquivo: ', error);
       alert('Erro ao enviar arquivo.');
@@ -54,7 +57,7 @@ export default function Dashboard() {
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const response = await api.get('/img');  // Aqui usamos o endpoint correto
+        const response = await api.get('/img');  
         setImages(response.data);
       } catch (error) {
         console.error('Erro ao carregar as imagens: ', error);
