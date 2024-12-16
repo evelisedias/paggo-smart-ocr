@@ -14,9 +14,6 @@ export default function Dashboard() {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [message, setMessage] = useState('');
 
-
-
-
   // Abrir o explorador e selecionar arquivo
   const handleButtonClick = () => {
     fileInputRef.current?.click();
@@ -37,18 +34,13 @@ export default function Dashboard() {
     formData.append('file', selectedFile);
     try {
       const response = await api.post('/img', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
+        headers: { 'Content-Type': 'multipart/form-data' },
       });
 
       alert('Upload realizado com sucesso!');
-      console.log('Resposta do servidor: ', response.data);
       setImages(prevImages => [...prevImages, response.data]);
-
-
     } catch (error) {
-      console.log('Erro ao enviar arquivo: ', error);
+      console.error('Erro ao enviar arquivo: ', error);
       alert('Erro ao enviar arquivo.');
     }
   };
@@ -57,7 +49,7 @@ export default function Dashboard() {
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const response = await api.get('/img');  
+        const response = await api.get('/img');
         setImages(response.data);
       } catch (error) {
         console.error('Erro ao carregar as imagens: ', error);
@@ -66,38 +58,27 @@ export default function Dashboard() {
     fetchImages();
   }, []);
 
-
-  //selecionar imagem
-  const handleSelectImage = (id: string) => {
-    console.log(id)
-    setSelectedId(id);
-  }
-
-  //extrair texto
+  const handleSelectImage = (id: string) => setSelectedId(id.toString());
 
   const handleExtractText = async () => {
-    if (!selectedId){
+    if (!selectedId) {
       setMessage('Selecione uma imagem primeiro!');
-      return
-  };
+      return;
+    }
 
-  try {
-    const response = await api.get(`/img${selectedId}/extract-text`);
-    setExtratedText(response.data.text);
-    setMessage('Texto Extraído com sucesso!')
-  } catch (error){
-    console.error('Erro ao extrair texto: ', error)
-    setMessage('Erro ao extrair texto da imagem.')
-  }
-}
+    try {
+      const response = await api.post(`/ocr/${selectedId}`);
+      setExtratedText(response.data.text);
+      setMessage('Texto Extraído com sucesso!');
+    } catch (error) {
+      console.error('Erro ao extrair texto: ', error);
+      setMessage('Erro ao extrair texto da imagem.');
+    }
+  };
 
   return (
     <div className={styles.dashboard}>
-
       <aside className={styles.sidebar}>
-        <div className={styles.logo}>
-          <img src="/favicon.ico" alt="Logo" />
-        </div>
         <input
           type="file"
           ref={fileInputRef}
@@ -105,36 +86,33 @@ export default function Dashboard() {
           accept="image/*, .pdf"
           className={styles.fileInput}
         />
-        <button onClick={handleButtonClick} className={styles.button}>
-          Anexar Arquivo
-        </button>
-                <button onClick={handleExtractText} className={styles.button}>
-          Extrair Texto
-        </button>     
-
+        <button onClick={handleButtonClick} className={styles.button}>Anexar Arquivo</button>
+        <button onClick={handleExtractText} className={styles.button}>Extrair Texto</button>
       </aside>
 
       <main className={styles.mainContent}>
-        <div>
-          {images.map((image) => (
-            <div key={image.id} className={styles.imageContainer}>
-              <img src='/recibo.ico' className={styles.imgRecibo} />
-              <input
-                type="radio"
-                className={styles.radioSelected}
-                checked={selectedId === image.id}
-                onChange={() => handleSelectImage(image.id)}
-              />
-              <p className={styles.imageName}>{image.title}</p>
-            </div>
-          ))}
-        </div>
-        <div>
-        {}
+        {images.map((image) => (
+          <div key={image.id} className={styles.imageContainer}>
+            <img src='/recibo.ico' className={styles.imgRecibo} />
+            <input 
+              type="radio" 
+              className={styles.radioSelected} 
+              checked={selectedId === image.id.toString()} 
+              onChange={() => handleSelectImage(image.id.toString())} 
+            />
+            <p className={styles.imageName}>{image.title}</p>
+          </div>
+        ))}
+
         {message && <p className={styles.success}>{message}</p>}
-        </div>
+
+        {extractedText && (
+          <div className={styles.extractedTextContainer}>
+            <h3>Texto Extraído</h3>
+            <p>{extractedText}</p>
+          </div>
+        )}
       </main>
     </div>
   );
 }
-

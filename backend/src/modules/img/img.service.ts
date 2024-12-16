@@ -20,7 +20,7 @@ export class ImgService {
             uploadedAt: new Date(),
             imagePath,
             user: {
-              connect: { id: 11}
+              connect: { id: 1}
             },
             
         },
@@ -39,12 +39,12 @@ export class ImgService {
     return this.prisma.img.findMany();
   }
 
-  async getImagesByUserId(userId: number) {
-    return this.prisma.img.findMany({
+  async getImagesByFilename(filename: string) {
+    return await this.prisma.img.findMany({
       where: {
-        userId: userId,
-      }
-    })
+        title: filename,  
+      },
+    });
   }
 
   async findById(id: number) {

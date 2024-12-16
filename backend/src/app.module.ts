@@ -3,6 +3,8 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { ImgModule } from './modules/img/img.module';  
 import { UserModule } from './modules/user/user.module';  
+import { OcrModule } from './modules/ocr/ocr.module'; 
+
 @Module({
   imports: [
     ServeStaticModule.forRoot({
@@ -11,6 +13,7 @@ import { UserModule } from './modules/user/user.module';
     }),
     ImgModule,  
     UserModule,  
+    OcrModule,
   ],
   controllers: [],
   providers: [],

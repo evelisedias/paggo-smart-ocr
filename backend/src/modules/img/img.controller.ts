@@ -9,7 +9,7 @@ import { Multer } from 'multer'
 export class ImgController {
   constructor(private readonly imgService: ImgService) { }
 
-  @Post()
+  @Post('upload')
   @UseInterceptors(
     FileInterceptor('file', {
       storage: multer.diskStorage({
@@ -21,7 +21,15 @@ export class ImgController {
     }),
   )
   async create(@UploadedFile() file: Multer.File) {
-    return this.imgService.create(file);
+    const filename = file.originalname;
+    const newImage = await this.imgService.create ({
+      title: filename,
+      userId: 1
+    })
+    return {
+      message: "upload realizado com sucesso!",
+      Image:newImage
+    }
   }
 
 
@@ -32,8 +40,8 @@ export class ImgController {
 
   @Get('/img')
   async getUserImages(@Req() request) {
-    const userId = request.user.id;
-    return this.imgService.getImagesByUserId(userId);
+    const filename = request.query.filename; 
+    return this.imgService.getImagesByFilename(filename); 
   }
 
   @Put(':id')

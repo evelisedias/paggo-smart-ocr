@@ -114,3 +114,21 @@
   left: 50%; 
   transform: translate(-50%, -50%); 
 }
+
+.extractedTextContainer {
+  background-color: #f4f4f9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+.extractedTextContainer h3 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.extractedTextContainer p {
+  color: #555;
+  white-space: pre-wrap; /* Isso preserva as quebras de linha */
+}
