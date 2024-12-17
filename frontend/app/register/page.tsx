@@ -58,7 +58,7 @@ export default function Register() {
           password: formData.confirmPassword
         })
 
-        if (response.status === 201){
+        if (response.status === 200){
           setSuccessMessage('Cadastro realizado com sucesso!')
           delayRedirect(2000)
         }

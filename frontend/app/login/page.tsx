@@ -40,21 +40,22 @@ export default function Login() {
     } 
 
     try {
-      const response = await api.post('/users/login', {
-        email: email,
-        password: password
-      });
-
+      const response = await api.post('/users/login', { email, password });
+      console.log(response);  
+  
       if (response.status === 201) {
-        setSuccessMessage('Iniciando...')
-        delayRedirect(3000)
-        
-        router.push('/dashboard')
+        const token = response.data.token;
+        console.log(token); 
+        localStorage.setItem('token', token);
+        setSuccessMessage('Iniciando...');
+        setTimeout(() => {
+          router.push('/dashboard');
+        }, 3000);
       }
-
+  
     } catch (error: any) {
       console.log('Erro ao fazer login: ', error);
-      setError('Credenciais inválidas. Tente novamente.')
+      setError(error?.response?.data?.message || 'Credenciais inválidas. Tente novamente.');
     }
   };
   
@@ -88,7 +89,7 @@ export default function Login() {
         <button type="submit" className={styles.button}>Entrar</button>
       </form>
       <div className={styles.registerLink}>
-        <a href="/register">Ainda não tem uma conta? <span>Registre-se</span></a>
+        <a href="/register">Ainda não tem uma conta? <span onClick={handleLoginClick}>Registre-se</span></a>
       </div>
     </div>
   );

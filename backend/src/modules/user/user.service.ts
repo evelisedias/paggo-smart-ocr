@@ -1,12 +1,15 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { PrismaService } from 'src/database/PrismaService';
-import { UserDTO } from './user.dto';
-import { HttpException, HttpStatus } from '@nestjs/common';
 import * as bcrypt from 'bcryptjs';
+import { JwtService } from '@nestjs/jwt'; 
+import { UserDTO } from './user.dto';
 
 @Injectable()
 export class UserService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private jwtService: JwtService 
+  ) {}
 
   async create(data: UserDTO) {
     const userExist = await this.prisma.user.findFirst({
@@ -30,27 +33,30 @@ export class UserService {
 
     return user;
   }
-    //Realizar login
 
-    async login (email: string, password: string) {
-      const user = await this.prisma.user.findUnique({
-        where: {email}
-      });
+  async login(email: string, password: string) {
+    const user = await this.prisma.user.findUnique({
+      where: { email }
+    });
 
-      if (!user) {
-        throw new HttpException('Usuário não encontrado', HttpStatus.NOT_FOUND);
-      }
-  
-      const isPasswordValid = await bcrypt.compare(password, user.password);
-  
-      if (!isPasswordValid) {
-        throw new HttpException('Credenciais inválidas', HttpStatus.UNAUTHORIZED);
-      }
-  
-      return { message: 'Login bem-sucedido', user };  
+    if (!user) {
+      throw new HttpException('Usuário não encontrado', HttpStatus.NOT_FOUND);
     }
 
-    
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+
+    if (!isPasswordValid) {
+      throw new HttpException('Credenciais inválidas', HttpStatus.UNAUTHORIZED);
+    }
+
+    const payload = { userId: user.id, email: user.email };
+    const token = this.jwtService.sign(payload); 
+
+    return { 
+      message: 'Login bem-sucedido', 
+      token 
+    };  
+  }
 
   async findAll() {
     return this.prisma.user.findMany();
@@ -62,10 +68,6 @@ export class UserService {
         email, 
       },
     });
-
-
-
-
 
     if (!userExist) {
       throw new HttpException('Usuário não encontrado', HttpStatus.NOT_FOUND);

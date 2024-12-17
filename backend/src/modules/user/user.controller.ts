@@ -1,10 +1,17 @@
-import { Controller, Post, Get, Body } from '@nestjs/common';
+import { Controller, Post, Get, Body, UseGuards, Request } from '@nestjs/common';
 import { UserDTO } from './user.dto';
 import { UserService } from './user.service';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
+
+  @Post('login')
+  async login(@Body() body: { email: string; password: string }) {
+    const { email, password } = body;
+    return this.userService.login(email, password);
+  }
 
   @Post()
   async create(@Body() data: UserDTO) {
@@ -12,13 +19,9 @@ export class UserController {
   }
 
   @Get()
-  async findAll() {
-    return this.userService.findAll();
-  }
-
-
-  @Post('login')
-  async login(@Body() body: { email: string; password: string }) {
-    return this.userService.login(body.email, body.password);
+  @UseGuards(AuthGuard('jwt'))
+  @Get('profile')
+  getProfile(@Request() req) {
+    return req.user;
   }
 }
