@@ -1,5 +1,4 @@
 # Paggo Smart OCR
-# Paggo Smart OCR
 
 ## Description
 
@@ -41,28 +40,31 @@
   ```bash
    git clone <https://github.com/evelisedias/paggo-smart-ocr.git>
    cd backend
+  ```
 
 2. **Install dependencies:**
 
   ```bash
     npm install
-
+  ```
 
 3. **Configure the database:**
   ```bash
     Set up a local or cloud PostgreSQL database.
     Configure the .env file with your database credentials. Example:
- 
+   ```
+
 4. ** Run the migrations:**
 
   ```bash
     npx prisma migrate dev
+  ```
 
 5. **Start the server:**
 
    ```bash
     npm run start
-
+  ```
 
 
 ### Frontend
@@ -72,17 +74,18 @@
    ```bash
     git clone <frontend_repository_link>
     cd frontend
+  ```
 
 2. **Install dependencies:**
-
    ```bash
     npm install
+  ```
     
 3. **Start the server:**
 
-   ```bash
+  ```bash
     npm run dev
-
+  ```
 
 Access the application in your browser at http://localhost:3000.
 
