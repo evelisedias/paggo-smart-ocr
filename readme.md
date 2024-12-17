@@ -64,7 +64,7 @@
 
    ```bash
     npm run start
-  ```
+   ```
 
 
 ### Frontend
@@ -74,18 +74,18 @@
    ```bash
     git clone <frontend_repository_link>
     cd frontend
-  ```
+   ```
 
 2. **Install dependencies:**
    ```bash
     npm install
-  ```
+   ```
     
 3. **Start the server:**
 
   ```bash
     npm run dev
-  ```
+   ```
 
 Access the application in your browser at http://localhost:3000.
 
